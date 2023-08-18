@@ -4,6 +4,7 @@ public class Room : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemies;
     private Vector3[] initialPosition;
+    private BoxCollider2D roomCollider;
 
     private void Awake()
     {
@@ -14,6 +15,8 @@ public class Room : MonoBehaviour
             if(enemies[i] != null)
                 initialPosition[i] = enemies[i].transform.position;
         }
+
+        roomCollider = GetComponent<BoxCollider2D>();
     }
     public void ActivateRoom(bool _status)
     {
@@ -26,5 +29,10 @@ public class Room : MonoBehaviour
                 enemies[i].transform.position = initialPosition[i];
             }
         }
+    }
+
+    public Bounds RoomBounds
+    {
+        get { return roomCollider.bounds; }
     }
 }
